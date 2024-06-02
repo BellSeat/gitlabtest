@@ -1,0 +1,27 @@
+stages:
+  - sync
+  - preflight
+  - prepare
+  - build-images
+  - fixtures
+  - lint
+  - test
+  - post-test
+  - review
+  - qa
+  - post-qa
+  - pre-merge
+  - pages
+  - notify
+  - release-environments
+  - benchmark
+  - push_to_github
+
+push_to_github:
+  stage: push_to_github
+  script:
+    - apt-get update && apt-get install -y ruby git
+    - gem install octokit
+    - ruby push_to_github.rb
+  only:
+    - master
